@@ -3,92 +3,97 @@ import 'package:flutter/material.dart';
 import 'package:learn_english/second_page.dart';
 
 
-double cardHeight = 200.0;
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      home: Scaffold(body: HomePageState()),
+    );
+  }
+}
 
-class HomePage extends StatefulWidget {
+class HomePageState extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePageState> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection("titles")
-                  .orderBy('title', descending: true)
-                  .snapshots(),
-              builder:
-                  (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  return buildBody(context, snapshot.data.docs);
-                }
-              }
-      ),
-    );
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection("titles")
+            .orderBy('title', descending: true)
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return buildBody(context, snapshot.data.docs);
+          }
+        });
   }
 
   Widget buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
     return ListView(
       children:
-      snapshot.map<Widget>((data) => buildListItem(context, data)).toList(),
+          snapshot.map<Widget>((data) => buildListItem(context, data)).toList(),
     );
   }
 
   buildListItem(BuildContext context, DocumentSnapshot data) {
     double widthW = MediaQuery.of(context).size.width;
     final row = GetCard.fromSnapshot(data);
-    return InkWell(
-      onTap: () => Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) =>
-              SecondPage()
-      ),
-    ),
-      child: Container(
-        height: cardHeight,
-        width: double.maxFinite,
-        child: Card(
-          elevation: 5,
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                left: cardHeight / 2,
-                child: Row(
-                  children: [
-                    Column(
-                      children: <Widget>[
-                        Container(
-                          child: Text(
-                            row.title,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 30),
+    return Card(
+      child: InkWell(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SecondPage(passData: row.reference.id),
+          ),
+        ),
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width /7),
+                    child: Column(
+                      children: [
+                        Text(
+                          row.title,
+                          style: TextStyle(
+                            fontSize: 30.0,
+                            color: Colors.black,
+                            fontFamily: 'Nunito Regular',
                           ),
                         ),
                         Text(
-                          "(" + row.engtitle + ")",
+                          "(" +row.engtitle + ")",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 30),
+                            fontSize: 30.0,
+                            color: Colors.black,
+                            fontFamily: 'Nunito Regular',
+                          ),
                         ),
                       ],
                     ),
-                    Column(
-                      children: [
-                        Container(
-                          width: 150,
-                          height: 150,
-                          child: Image.network(row.photo),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: Container(
+                        height: widthW/2.5,
+                        width: widthW/2.5,
+                        child: Image.network(row.photo)),
+                  ),
+                ],
               ),
             ],
           ),

@@ -1,30 +1,47 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class SecondPage extends StatelessWidget {
+  String passData;
+  SecondPage({Key key, @required this.passData}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: MyHomePage(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(passData),
+          leading: BackButton(
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
+        body:  MyHomePage(passData: passData,),
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  String passData;
+  MyHomePage({Key key, @required this.passData}) : super(key: key);
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState(passData);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String passData;
+  _MyHomePageState(this.passData);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: StreamBuilder(
+    return StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection("Second")
-              .orderBy('name', descending: true)
+              .collection(passData)
+              .orderBy('name', descending: false)
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -35,16 +52,13 @@ class _MyHomePageState extends State<MyHomePage> {
             } else {
               return buildBody(context, snapshot.data.docs);
             }
-          }),
+          }
     );
   }
 
   Widget buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
 
-    return ListView.builder(
-        itemCount: 1,
-        itemBuilder: (context, index) {
-          return GridView.count(
+    return GridView.count(
             shrinkWrap: true,
             crossAxisCount: 2,
             crossAxisSpacing: 10.0,
@@ -56,6 +70,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: FlipCard(
                       front: Container(
                         decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0.0,5.0),
+                            ),
+                          ],
+                            borderRadius: BorderRadius.circular(20.0),
                             image: DecorationImage(
                                 image: NetworkImage(
                                     GetGrid.fromSnapshot(snapshot[index])
@@ -65,20 +86,22 @@ class _MyHomePageState extends State<MyHomePage> {
                       direction: FlipDirection.HORIZONTAL, // default
                       back: Container(
                         decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
                             image: DecorationImage(
                                 image: NetworkImage(
                                     GetGrid.fromSnapshot(snapshot[index])
                                         .photo),
+                                colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
                                 fit: BoxFit.cover)),
                         child: Center(
                             child: Text(
-                                GetGrid.fromSnapshot(snapshot[index]).name,style: TextStyle(fontSize: 40,color: Colors.white),),),
+                                GetGrid.fromSnapshot(snapshot[index]).name,style: TextStyle(fontSize: 40,color: Colors.black),),),
                       )),
                 ),
               ),
             ),
           );
-        });
+
   }
 }
 

@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class SecondPage extends StatelessWidget {
-  final FlutterTts flutterTts = FlutterTts();
+
   String passData;
   SecondPage({Key key, @required this.passData}) : super(key: key);
 
@@ -22,7 +22,6 @@ class SecondPage extends StatelessWidget {
         ),
         body: MyHomePage(
           passData: passData,
-          flutterTts: flutterTts,
         ),
       ),
     );
@@ -30,19 +29,19 @@ class SecondPage extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  FlutterTts flutterTts;
+
   String passData;
-  MyHomePage({Key key, @required this.passData, @required this.flutterTts})
+  MyHomePage({Key key, @required this.passData})
       : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState(passData, flutterTts);
+  _MyHomePageState createState() => _MyHomePageState(passData);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   String passData;
-  FlutterTts flutterTts;
-  _MyHomePageState(this.passData, this.flutterTts);
+  final FlutterTts flutterTts = FlutterTts();
+  _MyHomePageState(this.passData);
 
   @override
   Widget build(BuildContext context) {

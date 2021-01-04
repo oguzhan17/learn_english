@@ -63,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
     Future _speak(String speakText) async {
+      await flutterTts.setLanguage("en-US");
       await flutterTts.speak(speakText);
     }
 

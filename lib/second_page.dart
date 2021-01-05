@@ -5,17 +5,21 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class SecondPage extends StatelessWidget {
-
   String passData;
   SecondPage({Key key, @required this.passData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       home: Scaffold(
         appBar: AppBar(
-          title: Text(passData),
+          title: Text(
+            passData,
+            style: TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: 28.0,
+                fontWeight: FontWeight.bold),
+          ),
           leading: BackButton(
             onPressed: () => Navigator.pop(context),
           ),
@@ -29,10 +33,8 @@ class SecondPage extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-
   String passData;
-  MyHomePage({Key key, @required this.passData})
-      : super(key: key);
+  MyHomePage({Key key, @required this.passData}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState(passData);
@@ -77,11 +79,12 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: const EdgeInsets.all(8.0),
           child: Container(
             child: FlipCard(
+                direction: FlipDirection.HORIZONTAL, // default
                 front: Container(
                   decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey,
+                          color: Colors.white,
                           offset: Offset(0.0, 5.0),
                         ),
                       ],
@@ -89,32 +92,66 @@ class _MyHomePageState extends State<MyHomePage> {
                       image: DecorationImage(
                           image: NetworkImage(
                               GetGrid.fromSnapshot(snapshot[index]).photo),
-                          fit: BoxFit.cover)),
+                          fit: BoxFit.fill)),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Text(GetGrid.fromSnapshot(snapshot[index]).isim,
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.black,
+                              fontFamily: 'Nunito',
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
                 ),
-                direction: FlipDirection.HORIZONTAL, // default
                 back: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.0),
                       image: DecorationImage(
                           image: NetworkImage(
                               GetGrid.fromSnapshot(snapshot[index]).photo),
-                          colorFilter: new ColorFilter.mode(
-                              Colors.black.withOpacity(0.5), BlendMode.dstATop),
                           fit: BoxFit.cover)),
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Text(
-                          GetGrid.fromSnapshot(snapshot[index]).name,
-                          style: TextStyle(fontSize: 40, color: Colors.black),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Container(
+                          color: Colors.transparent,
+                          height: 40.0,
+                          child: IconButton(
+                            icon: Icon(Icons.volume_up),
+                            onPressed: () => _speak( GetGrid.fromSnapshot(snapshot[index]).name),
+                          )
                         ),
-                        RaisedButton(
-                          child: Text('play'),
-                          onPressed: () => _speak(
-                              GetGrid.fromSnapshot(snapshot[index]).name),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.lightGreen[200].withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: Text(
+                            GetGrid.fromSnapshot(snapshot[index]).name,
+                            style: TextStyle(
+                                fontSize: 30,
+                                color: Colors.black,
+                                fontFamily: 'Nunito',
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 )),
           ),
@@ -126,13 +163,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class GetGrid {
   String name;
+  String isim;
   String photo;
   DocumentReference reference;
 
   GetGrid.fromMap(Map<String, dynamic> map, {this.reference})
       : assert(map["name"] != null),
+        assert(map["isim"] != null),
         assert(map["photo"] != null),
         name = map["name"],
+        isim = map["isim"],
         photo = map["photo"];
 
   GetGrid.fromSnapshot(DocumentSnapshot snapshot)

@@ -18,22 +18,17 @@ dependencies:
   flutter_tts: ^2.0.0
   firebase_analytics: ^6.3.0
   firebase_admob: ^0.10.3
+  curved_navigation_bar: ^0.3.7
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 flutter:
-
   uses-material-design: true
 
-  assets:
-    - assets/images/
 
   fonts:
     - family: Nunito
       fonts:
         - asset: assets/fonts/Nunito-Light.ttf
-    - family: MyCustomIcons
-      fonts:
-        - asset: assets/fonts/iconVoice.ttf

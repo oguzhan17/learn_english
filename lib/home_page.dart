@@ -5,9 +5,9 @@ import 'package:learn_english/second_page.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(body: HomePageState()),
-    );
+    return Scaffold(
+  //      backgroundColor: Colors.blueAccent,
+        body: HomePageState());
   }
 }
 
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePageState> {
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("titles")
-            .orderBy('title', descending: true)
+            .orderBy('title', descending: false)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePageState> {
 
   Widget buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
     return ListView(
+      shrinkWrap: true,
       children:
           snapshot.map<Widget>((data) => buildListItem(context, data)).toList(),
     );

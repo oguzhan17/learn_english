@@ -10,8 +10,7 @@ class SecondPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text(
             passData,
@@ -27,7 +26,6 @@ class SecondPage extends StatelessWidget {
         body: MyHomePage(
           passData: passData,
         ),
-      ),
     );
   }
 }
@@ -78,13 +76,16 @@ class _MyHomePageState extends State<MyHomePage> {
         (index) => Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
+
             child: FlipCard(
                 direction: FlipDirection.HORIZONTAL, // default
                 front: Container(
+
                   decoration: BoxDecoration(
+                    color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.white,
+                          color: Colors.grey.withOpacity(0.5),
                           offset: Offset(0.0, 5.0),
                         ),
                       ],
@@ -92,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       image: DecorationImage(
                           image: NetworkImage(
                               GetGrid.fromSnapshot(snapshot[index]).photo),
-                          fit: BoxFit.fill)),
+                          fit: BoxFit.scaleDown)),
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
@@ -117,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       image: DecorationImage(
                           image: NetworkImage(
                               GetGrid.fromSnapshot(snapshot[index]).photo),
-                          fit: BoxFit.cover)),
+                          fit: BoxFit.scaleDown)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

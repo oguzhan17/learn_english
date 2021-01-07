@@ -14,26 +14,22 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  bool visBool = false;
-  bool soruVisibility = true;
   void initState() {
     super.initState();
     start_quiz();
   }
 
+  int currentIndex;
   int totalQues = 3;
   int solvedQues = 1;
   String nextQue = "";
   String quiz_status = "YENİDEN BAŞLA";
   String score = "";
   String op1, op2, op3, op4, answer;
-  bool isQuizStarted = false;
   int finalScore = 0;
   List<int> solvedQuesIndexes = [];
-  bool isLottieVisib = false;
-  bool isRestartVisib = false;
-  bool isQuesVisib = true;
-  bool isAnsVisib = true;
+
+  bool isVisible = true;
 
   void check_ans(String value) {
     setState(() {
@@ -42,15 +38,8 @@ class _QuizPageState extends State<QuizPage> {
         finalScore += 1;
       }
       if (solvedQues - 1 == totalQues) {
-        visBool = true;
-        soruVisibility = false;
-        isQuizStarted = false;
+        isVisible = false;
         score = "Skor : $finalScore/$totalQues";
-        isLottieVisib = true;
-        isRestartVisib = true;
-        isAnsVisib = false;
-        isRestartVisib = true;
-        isQuesVisib = false;
       } else {
         var index = Random().nextInt(QUES.length);
         while (solvedQuesIndexes.contains(index)) {
@@ -70,14 +59,11 @@ class _QuizPageState extends State<QuizPage> {
 
   void start_quiz() {
     setState(() {
-      soruVisibility = true;
-      visBool = false;
+      isVisible = true;
       finalScore = 0;
       solvedQues = 1;
-      isQuizStarted = true;
       score = "";
       solvedQuesIndexes = [];
-      isLottieVisib = false;
 
       var index = Random().nextInt(QUES.length);
       while (solvedQuesIndexes.contains(index)) {
@@ -108,27 +94,23 @@ class _QuizPageState extends State<QuizPage> {
               Column(
                 children: <Widget>[
                   Visibility(
-                    visible: soruVisibility,
+                    visible: isVisible,
                     child: HeadingText(
                       "Soru : $solvedQues / $totalQues".toUpperCase(),
                     ),
                   ),
                   Visibility(
-                      visible: isQuesVisib,
+                      visible: isVisible,
                       child: QuestionText("$nextQue", screen_width)),
                   //Answer Button
                   Visibility(
-                    visible: isAnsVisib,
+                    visible: isVisible,
                     child: Column(
                       children: <Widget>[
-                        AnswerButton(
-                            op1, isQuizStarted, check_ans, screen_width),
-                        AnswerButton(
-                            op2, isQuizStarted, check_ans, screen_width),
-                        AnswerButton(
-                            op3, isQuizStarted, check_ans, screen_width),
-                        AnswerButton(
-                            op4, isQuizStarted, check_ans, screen_width),
+                        AnswerButton(op1, isVisible, check_ans, screen_width),
+                        AnswerButton(op2, isVisible, check_ans, screen_width),
+                        AnswerButton(op3, isVisible, check_ans, screen_width),
+                        AnswerButton(op4, isVisible, check_ans, screen_width),
                       ],
                     ),
                   ),
@@ -137,7 +119,7 @@ class _QuizPageState extends State<QuizPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Visibility(
-                        visible: isLottieVisib,
+                        visible: !isVisible,
                         child: Container(
                           width: screen_width,
                           child: Lottie.asset('assets/lottie/confetti.json',
@@ -152,12 +134,9 @@ class _QuizPageState extends State<QuizPage> {
                         ),
                       ),
                       Visibility(
-                        visible: isRestartVisib,
+                        visible: !isVisible,
                         child: MaterialButton(
-                          onPressed:(){ Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => QuizPage()),
-                          );},
+                          onPressed: () => start_quiz(),
                           color: Colors.green[800],
                           height: 50.0,
                           child: Text(

@@ -13,15 +13,13 @@ class AnswerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(180.0),
-      ),
+
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: MaterialButton(
         minWidth: screenWidth,
         onPressed: isQuizStarted ? () => checkAnswer("$optionText") : null,
         color: Colors.green,
-        height: 50.0,
+        height: screenWidth/10,
         child: AnswerText("$optionText", screenWidth),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50.0),

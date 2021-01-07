@@ -19,6 +19,7 @@ dependencies:
   firebase_analytics: ^6.3.0
   firebase_admob: ^0.10.3
   curved_navigation_bar: ^0.3.7
+  lottie: ^0.6.0
 
 dev_dependencies:
   flutter_test:
@@ -27,6 +28,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  assets:
+    - assets/lottie/confetti.json
+    - assets/lottie/lazy.json
 
   fonts:
     - family: Nunito

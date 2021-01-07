@@ -12,7 +12,7 @@ class HeadingText extends StatelessWidget {
         "$textHeading",
           style: TextStyle(
               fontSize: 30,
-              color: Colors.black,
+              color: Colors.white,
               fontFamily: 'Nunito',
               fontWeight: FontWeight.bold),
       ),

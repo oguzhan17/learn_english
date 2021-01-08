@@ -20,7 +20,7 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   int currentIndex;
-  int totalQues = 3;
+  int totalQues = QUES.length;
   int solvedQues = 1;
   String nextQue = "";
   String quiz_status = "YENİDEN BAŞLA";

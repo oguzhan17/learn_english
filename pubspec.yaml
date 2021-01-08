@@ -31,6 +31,10 @@ flutter:
   assets:
     - assets/lottie/confetti.json
     - assets/lottie/lazy.json
+    - assets/lottie/riding.json
+    - assets/lottie/singing.json
+    - assets/lottie/walking.json
+    - assets/images/quest.png
 
   fonts:
     - family: Nunito

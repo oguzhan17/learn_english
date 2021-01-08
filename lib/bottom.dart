@@ -5,21 +5,13 @@ import 'package:learn_english/bottomNavBar/quiz_page.dart';
 import 'package:learn_english/home_page.dart';
 
 class Bottom extends StatefulWidget {
-  int passIndex;
-  Bottom({Key key, @required this.passIndex}) : super(key: key);
-
-
 
   @override
-  _BottomState createState() => _BottomState(passIndex);
+  _BottomState createState() => _BottomState();
 }
 
 class _BottomState extends State<Bottom> {
-  int passIndex;
-  _BottomState(this.passIndex);
-
   int currentIndex;
-
 
   GlobalKey _bottomNavigationKey = GlobalKey();
 @override

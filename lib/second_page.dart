@@ -16,7 +16,7 @@ class SecondPage extends StatelessWidget {
             passData,
             style: TextStyle(
                 fontFamily: 'Nunito',
-                fontSize: 28.0,
+                fontSize: 25.0,
                 fontWeight: FontWeight.bold),
           ),
           leading: BackButton(
@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ],
                       borderRadius: BorderRadius.circular(20.0),
                       image: DecorationImage(
-                          image: NetworkImage(
+                              image: NetworkImage(
                               GetGrid.fromSnapshot(snapshot[index]).photo),
                           fit: BoxFit.scaleDown)),
                   child: Align(

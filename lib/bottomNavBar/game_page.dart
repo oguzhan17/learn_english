@@ -10,6 +10,7 @@ class _GamePageState extends State<GamePage> {
   List<ItemModel> items;
   List<ItemModel> items2;
   int score;
+  bool gameOver;
 
   @override
   void initState() {
@@ -18,6 +19,7 @@ class _GamePageState extends State<GamePage> {
   }
 
   initGame() {
+    gameOver = false;
     score = 0;
     items = [
       ItemModel(
@@ -41,6 +43,8 @@ class _GamePageState extends State<GamePage> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
+    if(items.length == 0)
+      gameOver = true;
     return Scaffold(
       backgroundColor: Colors.blueAccent,
       appBar: AppBar(
@@ -97,7 +101,7 @@ class _GamePageState extends State<GamePage> {
                 }).toList()),
                 Spacer(),
                 Column(
-                    children: items.map((item) {
+                    children: items2.map((item) {
                   return DragTarget<ItemModel>(
                     onAccept: (receivedItem) {
                       if (item.value == receivedItem.value) {
@@ -105,21 +109,34 @@ class _GamePageState extends State<GamePage> {
                           items.remove(receivedItem);
                           items2.remove(item);
                           score += 10;
+                          item.accepting = true;
                         });
                       } else {
                         setState(() {
                           score -= 5;
+                          item.accepting = false;
                         });
                       }
                     },
-                    onWillAccept: (receivedItem) => true,
+                    onLeave: (receivedItem) {
+                      setState(() {
+                        item.accepting = false;
+                      });
+                    },
+                    onWillAccept: (receivedItem) {
+                      setState(() {
+                        item.accepting = true;
+                      });
+                      return true;
+                    },
                     builder: (context, acceptedItems, rejectedItems) =>
                         Container(
                       height: h / 12,
                       width: w / 3,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30.0),
-                        color: Colors.green,
+                        color:
+                            item.accepting ? Colors.lightGreen : Colors.green,
                       ),
                       alignment: Alignment.center,
                       margin: EdgeInsets.symmetric(vertical: w / 15),
@@ -135,6 +152,16 @@ class _GamePageState extends State<GamePage> {
                 }).toList()),
               ],
             ),
+            if(gameOver)
+            RaisedButton(
+              textColor: Colors.white,
+              color: Colors.pink,
+              child: Text('Yeniden Başla!'),
+                onPressed: (){
+                initGame();
+                setState(() {
+                });
+                }),
           ],
         ),
       ),
@@ -146,6 +173,7 @@ class ItemModel {
   final String name;
   final String value;
   final String lottie;
+  bool accepting;
 
-  ItemModel({this.name, this.value, this.lottie});
+  ItemModel({this.name, this.value, this.lottie, this.accepting = false});
 }

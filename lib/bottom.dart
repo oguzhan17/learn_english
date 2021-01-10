@@ -23,13 +23,14 @@ class _BottomState extends State<Bottom> {
   Widget build(BuildContext context) {
     return Scaffold(
             bottomNavigationBar: CurvedNavigationBar(
+              color: Colors.blueAccent,
               key: _bottomNavigationKey,
               height: 50,
-              backgroundColor: Colors.blueAccent,
+              backgroundColor: Colors.white,
               items: <Widget>[
-                Icon(Icons.home),
-                Icon(Icons.assignment_outlined),
-                Icon(Icons.category)
+                Icon(Icons.home, color: Colors.white,),
+                Icon(Icons.assignment_outlined, color: Colors.white,),
+                Icon(Icons.category, color: Colors.white,)
               ],
               onTap: (index) {
                 setState(() {

@@ -18,7 +18,7 @@ class AnswerButton extends StatelessWidget {
       child: MaterialButton(
         minWidth: screenWidth,
         onPressed: isQuizStarted ? () => checkAnswer("$optionText") : null,
-        color: Colors.green,
+        color: Colors.blueAccent,
         height: screenWidth/10,
         child: AnswerText("$optionText", screenWidth),
         shape: RoundedRectangleBorder(

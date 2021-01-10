@@ -34,6 +34,9 @@ flutter:
     - assets/lottie/riding.json
     - assets/lottie/singing.json
     - assets/lottie/walking.json
+    - assets/lottie/driving.json
+    - assets/lottie/running.json
+    - assets/lottie/writing.json
     - assets/images/quest.png
 
   fonts:

@@ -8,7 +8,6 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   List<ItemModel> items;
-  List<ItemModel> items2;
   int score;
   bool gameOver;
 
@@ -31,11 +30,23 @@ class _GamePageState extends State<GamePage> {
           value: "Singing",
           lottie: 'assets/lottie/singing.json'),
       ItemModel(
-          name: "Riding", value: "Riding", lottie: 'assets/lottie/riding.json'),
+          name: "Riding",
+          value: "Riding",
+          lottie: 'assets/lottie/riding.json'),
+      ItemModel(
+          name: "Writing",
+          value: "Writing",
+          lottie: 'assets/lottie/writing.json'),
+      ItemModel(
+          name: "Running",
+          value: "Running",
+          lottie: 'assets/lottie/running.json'),
+      ItemModel(
+          name: "Driving",
+          value: "Driving",
+          lottie: 'assets/lottie/driving.json'),
     ];
-    items2 = List<ItemModel>.from(items);
     items.shuffle();
-    items2.shuffle();
   }
 
   @override
@@ -46,7 +57,6 @@ class _GamePageState extends State<GamePage> {
     if(items.length == 0)
       gameOver = true;
     return Scaffold(
-      backgroundColor: Colors.blueAccent,
       appBar: AppBar(
         title: Text(
           'Sürükle & Bırak',
@@ -67,7 +77,7 @@ class _GamePageState extends State<GamePage> {
                       text: 'Score : ',
                       style: TextStyle(
                           fontSize: 30.0,
-                          color: Colors.white,
+                          color: Colors.blue,
                           fontFamily: 'Nunito')),
                   TextSpan(
                     text: '$score',
@@ -98,16 +108,16 @@ class _GamePageState extends State<GamePage> {
                             width: w / 3,
                             child: Lottie.asset(item.lottie))),
                   );
-                }).toList()),
+                }).take(4).toList()),
                 Spacer(),
                 Column(
-                    children: items2.map((item) {
+                    children: items.map((item) {
                   return DragTarget<ItemModel>(
                     onAccept: (receivedItem) {
                       if (item.value == receivedItem.value) {
                         setState(() {
                           items.remove(receivedItem);
-                          items2.remove(item);
+                          items.remove(item);
                           score += 10;
                           item.accepting = true;
                         });
@@ -118,17 +128,7 @@ class _GamePageState extends State<GamePage> {
                         });
                       }
                     },
-                    onLeave: (receivedItem) {
-                      setState(() {
-                        item.accepting = false;
-                      });
-                    },
-                    onWillAccept: (receivedItem) {
-                      setState(() {
-                        item.accepting = true;
-                      });
-                      return true;
-                    },
+
                     builder: (context, acceptedItems, rejectedItems) =>
                         Container(
                       height: h / 12,
@@ -149,19 +149,34 @@ class _GamePageState extends State<GamePage> {
                       ),
                     ),
                   );
-                }).toList()),
+                }).take(4).toList()..shuffle()
+                ),
               ],
             ),
             if(gameOver)
-            RaisedButton(
-              textColor: Colors.white,
-              color: Colors.pink,
-              child: Text('Yeniden Başla!'),
-                onPressed: (){
-                initGame();
-                setState(() {
-                });
-                }),
+            Padding(
+              padding: const EdgeInsets.only(top: 18.0),
+              child: SizedBox(
+                height: 50.0,
+                width: MediaQuery.of(context).size.width / 2,
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  textColor: Colors.white,
+                  color: Colors.pink,
+                  child: Text('Yeniden Başla!',
+                  style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 25
+                  ),),
+                    onPressed: (){
+                    initGame();
+                    setState(() {
+                    });
+                    }),
+              ),
+            ),
           ],
         ),
       ),

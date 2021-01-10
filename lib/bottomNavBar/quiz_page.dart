@@ -20,7 +20,7 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   int currentIndex;
-  int totalQues = QUES.length;
+  int totalQues = 10;
   int solvedQues = 1;
   String nextQue = "";
   String quiz_status = "YENİDEN BAŞLA";
@@ -84,7 +84,6 @@ class _QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     double screen_width = MediaQuery.of(context).size.width * 0.8;
     return Scaffold(
-      backgroundColor: Colors.blueAccent,
       body: ListView(
         shrinkWrap: true,
         children: <Widget>[

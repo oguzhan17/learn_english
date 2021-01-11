@@ -62,13 +62,13 @@ class _HomePageState extends State<HomePageState> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width /7),
+                        left: MediaQuery.of(context).size.width /10),
                     child: Column(
                       children: [
                         Text(
                           row.title,
                           style: TextStyle(
-                            fontSize: 30.0,
+                            fontSize: widthW/15,
                             color: Colors.black,
                             fontFamily: 'Nunito Regular',
                           ),
@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePageState> {
                         Text(
                           "(" +row.engtitle + ")",
                           style: TextStyle(
-                            fontSize: 30.0,
+                            fontSize: widthW/15,
                             color: Colors.black,
                             fontFamily: 'Nunito Regular',
                           ),

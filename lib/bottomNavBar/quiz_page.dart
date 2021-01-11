@@ -36,6 +36,7 @@ class _QuizPageState extends State<QuizPage> {
       solvedQues += 1;
       if (value == answer) {
         finalScore += 1;
+
       }
       if (solvedQues - 1 == totalQues) {
         isVisible = false;
@@ -117,6 +118,7 @@ class _QuizPageState extends State<QuizPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      if(finalScore > 6)
                       Visibility(
                         visible: !isVisible,
                         child: Container(
@@ -125,6 +127,15 @@ class _QuizPageState extends State<QuizPage> {
                               fit: BoxFit.scaleDown),
                         ),
                       ),
+                      if(finalScore<7)
+                          Visibility(
+                            visible: !isVisible,
+                            child: Container(
+                              width: screen_width,
+                              child: Lottie.asset('assets/lottie/lazy.json',
+                                  fit: BoxFit.scaleDown),
+                            ),
+                          ),
                       Text(
                         score,
                         style: TextStyle(

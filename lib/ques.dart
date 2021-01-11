@@ -72,7 +72,7 @@ final QUES = [
   {
     "question": "https://1.bp.blogspot.com/-f_sB6_A3PxE/X_YOfBAfJ5I/AAAAAAABJ5w/o237GMzvV2MHZwzDVpRFch9ueLaq407ngCLcBGAsYHQ/s0/zebra.png",
     "answers": ["Squirrel", "Wolf", "Zebra", "Turtle"],
-    "correctIndex": 3
+    "correctIndex": 2
   },
   {
     "question": "https://1.bp.blogspot.com/-8TxQKssDn_g/X_YOoYAj4AI/AAAAAAABJ50/vyOyNDTo1LgE_SMkPQmHGCFobC1HrF4DgCLcBGAsYHQ/s16000/dinosaur.png",
@@ -86,7 +86,7 @@ final QUES = [
   },
   {
     "question": "https://1.bp.blogspot.com/-Vo9Y4NJibdI/X_dp-hCF3FI/AAAAAAABJ74/DWssI5msjuEwlFkC-k2C2u_XqwCWoCJ7QCLcBGAsYHQ/s320/hippo.png",
-    "answers": ["hippo", "Leopard", "Goat", "Deer"],
+    "answers": ["Hippo", "Leopard", "Goat", "Deer"],
     "correctIndex": 0
   },
   {

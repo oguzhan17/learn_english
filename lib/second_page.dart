@@ -76,11 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
         (index) => Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-
             child: FlipCard(
                 direction: FlipDirection.HORIZONTAL, // default
                 front: Container(
-
                   decoration: BoxDecoration(
                     color: Colors.white,
                       boxShadow: [
@@ -108,7 +106,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 30,
                               color: Colors.black,
                               fontFamily: 'Nunito',
-                              fontWeight: FontWeight.bold)),
+                              fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),
@@ -118,7 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       image: DecorationImage(
                           image: NetworkImage(
                               GetGrid.fromSnapshot(snapshot[index]).photo),
-                          fit: BoxFit.scaleDown)),
+                          fit: BoxFit.scaleDown),
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePageState> {
                     child: Container(
                         height: widthW/2.5,
                         width: widthW/2.5,
-                        child: Image.network(row.photo)),
+                        child: Image.network(row.photo))
                   ),
                 ],
               ),

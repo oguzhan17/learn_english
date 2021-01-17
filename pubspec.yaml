@@ -30,6 +30,7 @@ flutter:
 
   assets:
     - assets/lottie/confetti.json
+    - assets/lottie/jumping.json
     - assets/lottie/lazy.json
     - assets/lottie/riding.json
     - assets/lottie/singing.json
@@ -38,8 +39,17 @@ flutter:
     - assets/lottie/running.json
     - assets/lottie/writing.json
     - assets/images/quest.png
+    - images/
+    - assets/
+
 
   fonts:
     - family: Nunito
       fonts:
         - asset: assets/fonts/Nunito-Light.ttf
+    - family: Satisfy
+      fonts:
+        - asset: fonts/Satisfy.ttf
+    - family: Alike
+      fonts:
+        - asset: fonts/Alike-Regular.ttf

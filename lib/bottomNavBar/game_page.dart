@@ -22,29 +22,49 @@ class _GamePageState extends State<GamePage> {
     score = 0;
     items = [
       ItemModel(
-          name: "Walking",
-          value: "Walking",
+          name: "Walk",
+          value: "Walk",
           lottie: 'assets/lottie/walking.json'),
       ItemModel(
-          name: "Singing",
-          value: "Singing",
+          name: "Sing",
+          value: "Sing",
           lottie: 'assets/lottie/singing.json'),
       ItemModel(
-          name: "Riding",
-          value: "Riding",
+          name: "Ride",
+          value: "Ride",
           lottie: 'assets/lottie/riding.json'),
       ItemModel(
-          name: "Writing",
-          value: "Writing",
+          name: "Write",
+            value: "Write",
           lottie: 'assets/lottie/writing.json'),
       ItemModel(
-          name: "Running",
-          value: "Running",
+          name: "Run",
+          value: "Run",
           lottie: 'assets/lottie/running.json'),
       ItemModel(
-          name: "Driving",
-          value: "Driving",
+          name: "Drive",
+          value: "Drive",
           lottie: 'assets/lottie/driving.json'),
+      ItemModel(
+          name: "Sleep",
+          value: "Sleep",
+          lottie: 'assets/lottie/sleeping.json'),
+      ItemModel(
+          name: "Cry",
+          value: "Cry",
+          lottie: 'assets/lottie/crying.json'),
+      ItemModel(
+          name: "Swim",
+          value: "Swim",
+          lottie: 'assets/lottie/swimming.json'),
+      ItemModel(
+          name: "Laugh",
+          value: "Laugh",
+          lottie: 'assets/lottie/laughing.json'),
+      ItemModel(
+          name: "Jump",
+          value: "Jump",
+          lottie: 'assets/lottie/jumping.json'),
     ];
     items.shuffle();
   }
@@ -54,8 +74,7 @@ class _GamePageState extends State<GamePage> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
-    if(items.length == 0)
-      gameOver = true;
+    if (items.length == 0) gameOver = true;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -65,6 +84,45 @@ class _GamePageState extends State<GamePage> {
               fontSize: 25.0,
               fontWeight: FontWeight.bold),
         ),
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.info,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    title: Text(
+                      'Fiillerin Anlamları',
+                      style: TextStyle(
+                          fontFamily: 'Nunito',
+                      fontWeight: FontWeight.bold),
+                    ),
+                    content: Text(
+                        'Walk : Yürümek\n'
+                            'Run : Koşmak\n'
+                            'Drive : Araba sürmek\n'
+                            'Ride : Bisiklet sürmek\n'
+                            'Sing : Şarkı söylemek\n'
+                            'Write : Yazı yazmak\n'
+                            'Jump : Zıplamak\n'
+                            'Laugh : Gülmek\n'
+                            'Cry : Ağlamak\n'
+                            'Swim : Yüzmek\n'
+                            'Sleep : Uyumak',
+                    style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontSize: 20
+                    ),),
+                  ),
+                );
+              }),
+        ],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -93,90 +151,94 @@ class _GamePageState extends State<GamePage> {
             Row(
               children: [
                 Column(
-                    children: items.map((item) {
-                  return Container(
-                    height: h / 6,
-                    width: w / 3,
-                    child: Draggable<ItemModel>(
-                        data: item,
-                        feedback: Container(
+                    children: items
+                        .map((item) {
+                          return Container(
                             height: h / 6,
                             width: w / 3,
-                            child: Lottie.asset(item.lottie)),
-                        child: Container(
-                            height: h / 6,
-                            width: w / 3,
-                            child: Lottie.asset(item.lottie))),
-                  );
-                }).take(4).toList()),
+                            child: Draggable<ItemModel>(
+                                data: item,
+                                feedback: Container(
+                                    height: h / 6,
+                                    width: w / 3,
+                                    child: Lottie.asset(item.lottie)),
+                                child: Container(
+                                    height: h / 6,
+                                    width: w / 3,
+                                    child: Lottie.asset(item.lottie))),
+                          );
+                        })
+                        .take(4)
+                        .toList()),
                 Spacer(),
                 Column(
-                    children: items.map((item) {
-                  return DragTarget<ItemModel>(
-                    onAccept: (receivedItem) {
-                      if (item.value == receivedItem.value) {
-                        setState(() {
-                          items.remove(receivedItem);
-                          items.remove(item);
-                          score += 10;
-                          item.accepting = true;
-                        });
-                      } else {
-                        setState(() {
-                          score -= 5;
-                          item.accepting = false;
-                        });
-                      }
-                    },
-
-                    builder: (context, acceptedItems, rejectedItems) =>
-                        Container(
-                      height: h / 12,
-                      width: w / 3,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30.0),
-                        color:
-                            item.accepting ? Colors.lightGreen : Colors.green,
-                      ),
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.symmetric(vertical: w / 15),
-                      child: Text(
-                        item.name,
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: Colors.white,
-                            fontFamily: 'Nunito'),
-                      ),
-                    ),
-                  );
-                }).take(4).toList()..shuffle()
-                ),
+                    children: items
+                        .map((item) {
+                          return DragTarget<ItemModel>(
+                            onAccept: (receivedItem) {
+                              if (item.value == receivedItem.value) {
+                                setState(() {
+                                  items.remove(receivedItem);
+                                  items.remove(item);
+                                  score += 10;
+                                  item.accepting = true;
+                                });
+                              } else {
+                                setState(() {
+                                  score -= 5;
+                                  item.accepting = false;
+                                });
+                              }
+                            },
+                            builder: (context, acceptedItems, rejectedItems) =>
+                                Container(
+                              height: h / 12,
+                              width: w / 3,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30.0),
+                                color: item.accepting
+                                    ? Colors.lightGreen
+                                    : Colors.green,
+                              ),
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.symmetric(vertical: w / 15),
+                              child: Text(
+                                item.name,
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    color: Colors.white,
+                                    fontFamily: 'Nunito'),
+                              ),
+                            ),
+                          );
+                        })
+                        .take(4)
+                        .toList()
+                          ..shuffle()),
               ],
             ),
-            if(gameOver)
-            Padding(
-              padding: const EdgeInsets.only(top: 18.0),
-              child: SizedBox(
-                height: 50.0,
-                width: MediaQuery.of(context).size.width / 2,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  textColor: Colors.white,
-                  color: Colors.pink,
-                  child: Text('Yeniden Başla!',
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 25
-                  ),),
-                    onPressed: (){
-                    initGame();
-                    setState(() {
-                    });
-                    }),
+            if (gameOver)
+              Padding(
+                padding: const EdgeInsets.only(top: 18.0),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height / 15,
+                  width: MediaQuery.of(context).size.width / 1.8,
+                  child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      textColor: Colors.white,
+                      color: Colors.pink,
+                      child: Text(
+                        'Yeniden Başla!',
+                        style: TextStyle(fontFamily: 'Nunito', fontSize: 25),
+                      ),
+                      onPressed: () {
+                        initGame();
+                        setState(() {});
+                      }),
+                ),
               ),
-            ),
           ],
         ),
       ),

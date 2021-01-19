@@ -3,6 +3,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:learn_english/services/advert-service.dart';
 
 class SecondPage extends StatelessWidget {
   String passData;
@@ -31,6 +32,7 @@ class SecondPage extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+
   String passData;
   MyHomePage({Key key, @required this.passData}) : super(key: key);
 
@@ -62,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
+    double widthH = MediaQuery.of(context).size.width;
     Future _speak(String speakText) async {
       await flutterTts.setLanguage("en-US");
       await flutterTts.speak(speakText);
@@ -98,12 +101,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       alignment: Alignment.center,
                       height: 50,
                       decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.lightGreen[200].withOpacity(0.7),
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Text(GetGrid.fromSnapshot(snapshot[index]).isim,
                           style: TextStyle(
-                              fontSize: 30,
+                              fontSize:widthH/14,
                               color: Colors.black,
                               fontFamily: 'Nunito',
                               fontWeight: FontWeight.bold),
@@ -145,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Text(
                             GetGrid.fromSnapshot(snapshot[index]).name,
                             style: TextStyle(
-                                fontSize: 30,
+                                fontSize:widthH/14,
                                 color: Colors.black,
                                 fontFamily: 'Nunito',
                                 fontWeight: FontWeight.bold),

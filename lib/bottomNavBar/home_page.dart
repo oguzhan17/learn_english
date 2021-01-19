@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_english/second_page.dart';
+import 'package:learn_english/services/advert-service.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -16,6 +17,13 @@ class HomePageState extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePageState> {
+  final AdvertService _advertService = AdvertService();
+
+  @override
+  void initState() {
+    _advertService.showBanner();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

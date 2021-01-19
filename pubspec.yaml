@@ -20,6 +20,13 @@ dependencies:
   firebase_admob: ^0.10.3
   curved_navigation_bar: ^0.3.7
   lottie: ^0.6.0
+  flutter_launcher_icons: ^0.8.1
+
+flutter_icons:
+  image_path: "assets/icon/icon.png"
+  android: true
+  ios: true
+
 
 dev_dependencies:
   flutter_test:
@@ -38,8 +45,10 @@ flutter:
     - assets/lottie/driving.json
     - assets/lottie/running.json
     - assets/lottie/writing.json
-    - assets/images/quest.png
-    - images/
+    - assets/lottie/crying.json
+    - assets/lottie/laughing.json
+    - assets/lottie/swimming.json
+    - assets/lottie/sleeping.json
     - assets/
 
 
@@ -47,9 +56,3 @@ flutter:
     - family: Nunito
       fonts:
         - asset: assets/fonts/Nunito-Light.ttf
-    - family: Satisfy
-      fonts:
-        - asset: fonts/Satisfy.ttf
-    - family: Alike
-      fonts:
-        - asset: fonts/Alike-Regular.ttf

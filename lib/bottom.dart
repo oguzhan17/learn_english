@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_english/bottomNavBar/game_page.dart';
-import 'package:learn_english/home_page.dart';
+import 'file:///C:/Users/oguzh/FlutterProjects/learn_english/learn_english/lib/bottomNavBar/home_page.dart';
 
 import 'bottomNavBar/quiz_home.dart';
 
@@ -40,7 +40,7 @@ class _BottomState extends State<Bottom> {
               },
             ),
             body: (currentIndex == 0) ? HomePage()
-                : (currentIndex == 1) ? homepage()
+                : (currentIndex == 1) ? QuizHome()
                 :  GamePage()
 
     );

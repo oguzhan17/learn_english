@@ -2,16 +2,16 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../resultpage.dart';
+import 'resultpage.dart';
 
 Random random = new Random();
 int randomNumber = random.nextInt(8);
 
 class getjson extends StatelessWidget {
-  // accept the langname as a parameter
 
   String categName;
 
@@ -19,9 +19,6 @@ class getjson extends StatelessWidget {
 
   String assettoload;
 
-  // a function
-  // sets the asset to a particular JSON file
-  // and opens the JSON
   setasset() {
     if (categName == "Colors") {
       assettoload = "assets/colors.json";
@@ -32,7 +29,7 @@ class getjson extends StatelessWidget {
     } else if (categName == "Organs") {
       assettoload = "assets/organs.json";
     } else {
-      assettoload = "assets/colors.json";
+      assettoload = "assets/professions.json";
     }
   }
 
@@ -51,7 +48,7 @@ class getjson extends StatelessWidget {
           return Scaffold(
             body: Center(
               child: Text(
-                "Loading",
+                "Yükleniyor",
               ),
             ),
           );
@@ -86,7 +83,6 @@ class _quizpageState extends State<quizpage> {
   int i = randomNumber;
   bool disableAnswer = false;
 
-  // extra varibale to iterate
   int j = 1;
   int timer = 30;
   String showtimer = "30";
@@ -113,9 +109,6 @@ class _quizpageState extends State<quizpage> {
         break;
       }
     }
-    print("---------");
-    print(random_array);
-    print(mydata[1].length);
   }
 
   @override
@@ -154,7 +147,7 @@ class _quizpageState extends State<quizpage> {
     canceltimer = false;
     timer = 30;
     setState(() {
-      if (j < mydata[1].length && j <3) {
+      if (j < mydata[1].length && j < 10) {
         i = random_array[j];
         j++;
       } else {
@@ -191,14 +184,16 @@ class _quizpageState extends State<quizpage> {
 
   Widget choicebutton(String k) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: 10.0,
-        horizontal: 20.0,
+      padding: EdgeInsets.only(
+        bottom: screenHeight * 0.008,
+        left: screenWidth * 0.04,
+        right: screenWidth * 0.04,
       ),
       child: MaterialButton(
         minWidth: screenWidth,
-        height: 60,
+        height: screenHeight * 0.08,
         onPressed: () => checkanswer(k),
         child: Text(
           mydata[1][i.toString()][k],
@@ -206,8 +201,7 @@ class _quizpageState extends State<quizpage> {
               fontSize: 30,
               color: Colors.white,
               fontFamily: 'Nunito',
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
           //  maxLines: 1,
         ),
         color: btncolor[k],
@@ -232,43 +226,52 @@ class _quizpageState extends State<quizpage> {
         return showDialog(
             context: context,
             builder: (context) => AlertDialog(
-                  title: Text(
-                    "Quizstar",
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
-                  content: Text("You Can't Go Back At This Stage."),
+                  title: Text(
+                    "Uyarı",
+                  ),
+                  content: Text("Quizi bitirmeden çıkamazsın :( "),
                   actions: <Widget>[
                     FlatButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                       child: Text(
-                        'Ok',
+                        'Peki :(',
                       ),
                     )
                   ],
                 ));
       },
       child: Scaffold(
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              flex: 4,
-              child: Container(
-                height: screenHeight * 0.35,
-                margin: EdgeInsets.only(top: 50),
-                width: screenWidth * 0.8,
-                padding: EdgeInsets.all(15.0),
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                  image: NetworkImage(
-                    mydata[0][i.toString()],
-                  ),
-                )),
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[
+              Text(
+                showtimer,
+                style: TextStyle(
+                  fontSize: 35.0,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'Nunito',
+                ),
               ),
-            ),
-            Expanded(
-              flex: 6,
-              child: AbsorbPointer(
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: screenHeight * 0.03,),
+                child: Container(
+                  height: screenHeight * 0.30,
+                  width: screenWidth * 0.8,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                    image: NetworkImage(
+                      mydata[0][i.toString()],
+                    ),
+                  )),
+                ),
+              ),
+              AbsorbPointer(
                 absorbing: disableAnswer,
                 child: Container(
                   child: Column(
@@ -282,24 +285,8 @@ class _quizpageState extends State<quizpage> {
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                alignment: Alignment.topCenter,
-                child: Center(
-                  child: Text(
-                    showtimer,
-                    style: TextStyle(
-                      fontSize: 35.0,
-                      fontWeight: FontWeight.w700,
-                      fontFamily: 'Times New Roman',
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

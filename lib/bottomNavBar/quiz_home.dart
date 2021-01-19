@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'quizpage.dart';
+import '../quizPage/quizpage.dart';
 
-class homepage extends StatefulWidget {
+class QuizHome extends StatefulWidget {
   @override
-  _homepageState createState() => _homepageState();
+  _QuizHomeState createState() => _QuizHomeState();
 }
 
-class _homepageState extends State<homepage> {
+class _QuizHomeState extends State<QuizHome> {
   List<String> images = [
     "https://lh3.googleusercontent.com/-KF90sztNd0Q/X-8DSDWCzWI/AAAAAAABJ0U/8eXpMzbITGkVHOxVR8H67iJGYeULfSiTQCLcBGAsYHQ/s16000/colors.png",
     "https://lh3.googleusercontent.com/-Yw6wkoErTL8/X-8IqEQjC9I/AAAAAAABJ0k/VJNVkItxhwktN4clpT05cAj0Y1FoVsarwCLcBGAsYHQ/s16000/pngegg.png",
@@ -17,7 +17,9 @@ class _homepageState extends State<homepage> {
     "https://1.bp.blogspot.com/-HMMpuveR_1Y/X_uMnyyzrpI/AAAAAAABKUg/EcpY5qrgVAsqolqcxzAgT925ENXVtvqXQCLcBGAsYHQ/s320/meslekler.png"
   ];
 
-  Widget QuizCard(String categName, String image) {
+  Widget quizCard(String categName, String image) {
+
+    double widthH = MediaQuery.of(context).size.width;
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 8.0,
@@ -32,29 +34,43 @@ class _homepageState extends State<homepage> {
           );
         },
         child: Material(
-          elevation: 10,
+          elevation: 5,
           child: Column(
-            children: <Widget>[
-              Container(
-                height: 100.0,
-                child: ClipOval(
-                  child: Image(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                      image,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: widthH / 15),
+                    child: Column(
+                      children: [
+                        Text(
+                          categName,
+                          style: TextStyle(
+                            fontSize: widthH/13,
+                            fontFamily: 'Nunito Regular',
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ),
-              Center(
-                child: Text(
-                  categName,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontFamily: "Nunito",
-                    fontWeight: FontWeight.bold,
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: Container(
+                      height: 120,
+                      child: ClipOval(
+                        child: Image(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            image,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ],
           ),
@@ -65,6 +81,7 @@ class _homepageState extends State<homepage> {
 
   @override
   Widget build(BuildContext context) {
+    double heightH = MediaQuery.of(context).size.height;
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
     return Scaffold(
@@ -72,20 +89,18 @@ class _homepageState extends State<homepage> {
         title: Text(
           "Quiz",
           style: TextStyle(
-            fontFamily: "Nunito",
+              fontFamily: "Nunito",
               fontSize: 25.0,
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
         ),
       ),
       body: ListView(
         children: <Widget>[
-
-          QuizCard("Animals", images[1]),
-          QuizCard("Fruits", images[2]),
-          QuizCard("Professions", images[4]),
-          QuizCard("Colors", images[0]),
-          QuizCard("Organs", images[3]),
+          quizCard("Animals", images[1]),
+          quizCard("Fruits", images[2]),
+          quizCard("Professions", images[4]),
+          quizCard("Colors", images[0]),
+          quizCard("Organs", images[3]),
         ],
       ),
     );

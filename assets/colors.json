@@ -1,13 +1,16 @@
 [
   {
-    "0": "https://1.bp.blogspot.com/-PSf1XMWA2lQ/X-81VYcMOsI/AAAAAAABJ04/09cWJgeZFXYObiOgVytxn1ZksQiv8BIvwCLcBGAsYHQ/s16000/Blue.jpg",
-    "1": "https://1.bp.blogspot.com/-bCykleNlQIc/X-80v2myB7I/AAAAAAABJ0w/H_hHO9nXwCcIcOB41nzMp8vhTjvQT8ZrgCLcBGAsYHQ/s200/Green.png",
-    "2": "https://1.bp.blogspot.com/-IV9847UivxU/X-82pSIXoVI/AAAAAAABJ1U/mA0GQbDYM6YH0qGGIjT-_R0LnirUDhavgCLcBGAsYHQ/s0/Red.png",
-    "3": "https://1.bp.blogspot.com/-TjZJuVsEKsU/X-82pTOGmNI/AAAAAAABJ1Y/U21VUdLFp_Arrp3UWyM-hbQZNtxZWNNIQCLcBGAsYHQ/s0/White.png",
-    "4": "https://1.bp.blogspot.com/-SjB_kL6r-ic/X-82oxn-zRI/AAAAAAABJ1I/ZvD3IOUN1eAf8FmVce4kKpPQliRSGJGAwCLcBGAsYHQ/s0/Purple.jpg",
-    "5": "https://1.bp.blogspot.com/-g8WNYmvrXz0/X-82o_a9tvI/AAAAAAABJ1Q/r3qDWQDCDdgRbe423da5pX7bjzt_06R1ACLcBGAsYHQ/s0/Black.jpg",
-    "6": "https://1.bp.blogspot.com/-I_mzUlUWdpI/X-81tbBRjfI/AAAAAAABJ1A/OCUUhaRuC389VCqjIaZEj8lvHnZto4MHwCLcBGAsYHQ/w320-h320/Yellow.jpg",
-    "7": "https://1.bp.blogspot.com/-L9_PW85QazI/X-82o7PsCiI/AAAAAAABJ1M/2i089Y4bproR1m5LQMGZ8WFcmeUnMQIiQCLcBGAsYHQ/s320/Pink.jpg"
+    "0": "https://1.bp.blogspot.com/-WpusyBePvD4/YASe6myPdGI/AAAAAAABKgk/ZUwLrDUG7u0UiL-JIcfGRQYjr8pWo5ldgCLcBGAsYHQ/s0/blue.png",
+    "1": "https://1.bp.blogspot.com/-WBqtVbWjj7Y/YASe6uai42I/AAAAAAABKgc/kprgr7Boz189abw8Fa0e2EANoL7_u21WwCLcBGAsYHQ/s0/green.png",
+    "2": "https://1.bp.blogspot.com/-yBOXy1NAY_k/YASe8GHv9aI/AAAAAAABKg0/uF40otTxi0wJYwHa2P833OlFewjVbFfPgCLcBGAsYHQ/s0/red.png",
+    "3": "https://1.bp.blogspot.com/-c4wUNuuujrU/YASfFDpHnwI/AAAAAAABKg8/_AiVqrOeylo7FyLU-_PoHqvL4YUhCwkPACLcBGAsYHQ/s0/white.png",
+    "4": "https://1.bp.blogspot.com/-wDuhtyvZ4ds/YASe74E0brI/AAAAAAABKgw/JHzX5SBrjk4D0-uuAqaavEe0LL1MIKVUgCLcBGAsYHQ/s0/purple.png",
+    "5": "https://1.bp.blogspot.com/-T_AyxpkcQeU/YASe6jZAgvI/AAAAAAABKgg/3eDKsy0WWyYAHjEOj19ceiBzUcOUtZzrwCLcBGAsYHQ/s0/black.png",
+    "6": "https://1.bp.blogspot.com/-Fe9DD4mLNG0/YASe8JI_T1I/AAAAAAABKg4/lKnUY6VeIw0BhOzpJi4GYqk4N6rlUPopwCLcBGAsYHQ/s0/yellow.png",
+    "7": "https://1.bp.blogspot.com/-u-e2pkeqBqc/YASe7mQL5CI/AAAAAAABKgs/QBMMJo5Z7fkBu5SFNBj6HvOGPoJ8_peHwCLcBGAsYHQ/s0/pink.png",
+    "8": "https://1.bp.blogspot.com/-jJ5RB4GpJMk/YASgEbnZiTI/AAAAAAABKhU/NP-oZMYsPYQYE0veQxlP17beFkMBoFVagCLcBGAsYHQ/s0/kahvi.png",
+    "9": "https://1.bp.blogspot.com/-jbIOjLX_MHw/YASgR50-3wI/AAAAAAABKhY/h-6WYP8rUiUB_CP5oi26DvUjB681oe-JQCLcBGAsYHQ/s0/turuncu.png",
+    "10": "https://1.bp.blogspot.com/-mjaWYFoNEvo/YASe7bGepzI/AAAAAAABKgo/HjSqvyLntpknpMX-KZrO3I6udHoXxn15gCLcBGAsYHQ/s0/grey.png"
   },
   {
     "0": {
@@ -57,6 +60,24 @@
       "b": "Green",
       "c": "Blue",
       "d": "Red"
+    },
+    "8": {
+      "a": "Brown",
+      "b": "Green",
+      "c": "Blue",
+      "d": "Red"
+    },
+    "9": {
+      "a": "Brown",
+      "b": "Orange",
+      "c": "Blue",
+      "d": "Red"
+    },
+    "10": {
+      "a": "Green",
+      "b": "Grey",
+      "c": "Blue",
+      "d": "Red"
     }
   },
   {
@@ -67,6 +88,9 @@
     "4": "Purple",
     "5": "Black",
     "6": "Yellow",
-    "7": "Pink"
+    "7": "Pink",
+    "8": "Brown",
+    "9": "Orange",
+    "10": "Grey"
   }
 ]

@@ -11,12 +11,9 @@ import 'resultpage.dart';
 Random random = new Random();
 int randomNumber = random.nextInt(8);
 
-class getjson extends StatelessWidget {
-
+class GetJson extends StatelessWidget {
   String categName;
-
-  getjson(this.categName);
-
+  GetJson(this.categName);
   String assettoload;
 
   setasset() {
@@ -35,10 +32,7 @@ class getjson extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // this function is called before the build so that
-    // the string assettoload is avialable to the DefaultAssetBuilder
     setasset();
-    // and now we return the FutureBuilder to load and decode JSON
     return FutureBuilder(
       future:
           DefaultAssetBundle.of(context).loadString(assettoload, cache: false),
@@ -53,26 +47,26 @@ class getjson extends StatelessWidget {
             ),
           );
         } else {
-          return quizpage(mydata: mydata);
+          return QuizPage(mydata: mydata);
         }
       },
     );
   }
 }
 
-class quizpage extends StatefulWidget {
+class QuizPage extends StatefulWidget {
   final List mydata;
 
-  quizpage({Key key, @required this.mydata}) : super(key: key);
+  QuizPage({Key key, @required this.mydata}) : super(key: key);
 
   @override
-  _quizpageState createState() => _quizpageState(mydata);
+  _QuizPageState createState() => _QuizPageState(mydata);
 }
 
-class _quizpageState extends State<quizpage> {
+class _QuizPageState extends State<QuizPage> {
   final List mydata;
 
-  _quizpageState(this.mydata);
+  _QuizPageState(this.mydata);
 
   Color colortoshow = Colors.indigoAccent;
   Color right = Colors.green;
@@ -118,7 +112,6 @@ class _quizpageState extends State<quizpage> {
     super.initState();
   }
 
-  // overriding the setstate function to be called only if mounted
   @override
   void setState(fn) {
     if (mounted) {
@@ -166,6 +159,16 @@ class _quizpageState extends State<quizpage> {
   }
 
   void checkanswer(String k) {
+    String kk = '';
+    if (mydata[2][i.toString()] == mydata[1][i.toString()]['a']) {
+      kk = 'a';
+    } else if (mydata[2][i.toString()] == mydata[1][i.toString()]['b']) {
+      kk = 'b';
+    } else if (mydata[2][i.toString()] == mydata[1][i.toString()]['c']) {
+      kk = 'c';
+    } else {
+      kk = 'd';
+    }
     if (mydata[2][i.toString()] == mydata[1][i.toString()][k]) {
       marks = marks + 10;
       totalQues++;
@@ -175,11 +178,12 @@ class _quizpageState extends State<quizpage> {
       colortoshow = wrong;
     }
     setState(() {
+      btncolor[kk] = right;
       btncolor[k] = colortoshow;
       canceltimer = true;
       disableAnswer = true;
     });
-    Timer(Duration(milliseconds: 500), nextquestion);
+    Timer(Duration(milliseconds: 1200), nextquestion);
   }
 
   Widget choicebutton(String k) {
@@ -259,7 +263,8 @@ class _quizpageState extends State<quizpage> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
-                    vertical: screenHeight * 0.03,),
+                  vertical: screenHeight * 0.03,
+                ),
                 child: Container(
                   height: screenHeight * 0.30,
                   width: screenWidth * 0.8,

@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:224929048352:android:28d98cb8505ddf1e719945",
         "android_client_info": {
-          "package_name": "com.ao.learn_english"
+          "package_name": "com.ao.ingilizcekelimeogren"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "224929048352-q4vg7tm3d3o2doe5rih1nhlkghqhkkrl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.ao.learn_english",
+            "package_name": "com.ao.ingilizcekelimeogren",
             "certificate_hash": "816b8ab9e30844cafabf227e08de9e29d71db430"
           }
         },

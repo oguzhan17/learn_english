@@ -221,8 +221,8 @@ class _GamePageState extends State<GamePage> {
               Padding(
                 padding: const EdgeInsets.only(top: 18.0),
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height / 15,
-                  width: MediaQuery.of(context).size.width / 1.8,
+                  height: MediaQuery.of(context).size.height / 12,
+                  width: MediaQuery.of(context).size.width / 1.5,
                   child: RaisedButton(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),

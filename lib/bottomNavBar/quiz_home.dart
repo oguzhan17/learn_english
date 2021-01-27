@@ -29,7 +29,7 @@ class _QuizHomeState extends State<QuizHome> {
         onTap: () {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => getjson(categName),
+              builder: (context) => GetJson(categName),
             ),
           );
         },

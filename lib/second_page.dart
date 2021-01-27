@@ -11,22 +11,25 @@ class SecondPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            passData,
-            style: TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 25.0,
-                fontWeight: FontWeight.bold),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 55.0),
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              passData,
+              style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold),
+            ),
+            leading: BackButton(
+              onPressed: () => Navigator.pop(context),
+            ),
           ),
-          leading: BackButton(
-            onPressed: () => Navigator.pop(context),
+          body: MyHomePage(
+            passData: passData,
           ),
-        ),
-        body: MyHomePage(
-          passData: passData,
-        ),
+      ),
     );
   }
 }
@@ -67,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
     double widthH = MediaQuery.of(context).size.width;
     Future _speak(String speakText) async {
       await flutterTts.setLanguage("en-US");
+      await flutterTts.setSpeechRate(0.8);
       await flutterTts.speak(speakText);
     }
 
@@ -106,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       child: Text(GetGrid.fromSnapshot(snapshot[index]).isim,
                           style: TextStyle(
-                              fontSize:widthH/14,
+                              fontSize:widthH/15,
                               color: Colors.black,
                               fontFamily: 'Nunito',
                               fontWeight: FontWeight.bold),
@@ -148,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Text(
                             GetGrid.fromSnapshot(snapshot[index]).name,
                             style: TextStyle(
-                                fontSize:widthH/14,
+                                fontSize:widthH/15,
                                 color: Colors.black,
                                 fontFamily: 'Nunito',
                                 fontWeight: FontWeight.bold),

@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:learn_english/second_page.dart';
 import 'package:learn_english/services/advert-service.dart';
+
+import '../second_page.dart';
+
+
 
 class HomePage extends StatelessWidget {
   @override

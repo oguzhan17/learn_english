@@ -20,6 +20,7 @@ class _QuizHomeState extends State<QuizHome> {
   Widget quizCard(String categName, String image) {
 
     double widthH = MediaQuery.of(context).size.width;
+    double heightH = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 8.0,
@@ -59,7 +60,7 @@ class _QuizHomeState extends State<QuizHome> {
                   Padding(
                     padding: const EdgeInsets.only(right: 10.0),
                     child: Container(
-                      height: 120,
+                      height: heightH / 6,
                       child: ClipOval(
                         child: Image(
                           fit: BoxFit.cover,

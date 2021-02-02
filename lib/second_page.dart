@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +48,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String passData;
   final FlutterTts flutterTts = FlutterTts();
+
+
+
   _MyHomePageState(this.passData);
 
   @override
@@ -67,7 +72,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
+
+
+
     double widthH = MediaQuery.of(context).size.width;
+    double heightH = MediaQuery.of(context).size.height;
     Future _speak(String speakText) async {
       await flutterTts.setLanguage("en-US");
       await flutterTts.setSpeechRate(0.8);
@@ -75,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     return GridView.count(
+
       shrinkWrap: true,
       crossAxisCount: 2,
       crossAxisSpacing: 10.0,
@@ -103,14 +113,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     alignment: Alignment.bottomCenter,
                     child: Container(
                       alignment: Alignment.center,
-                      height: 50,
+                      height: heightH / 18,
                       decoration: BoxDecoration(
                         color: Colors.lightGreen[200].withOpacity(0.7),
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Text(GetGrid.fromSnapshot(snapshot[index]).isim,
                           style: TextStyle(
-                              fontSize:widthH/15,
+                              fontSize: GetGrid.fromSnapshot(snapshot[index]).isim.length > 13 ?
+                              widthH/(GetGrid.fromSnapshot(snapshot[index]).isim.length * 1.25) :  widthH/15.0,
                               color: Colors.black,
                               fontFamily: 'Nunito',
                               fontWeight: FontWeight.bold),
@@ -133,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         alignment: Alignment.topRight,
                         child: Container(
                           color: Colors.transparent,
-                          height: 40.0,
+                          height: 50.0,
                           child: IconButton(
                             icon: Icon(Icons.volume_up),
                             onPressed: () => _speak( GetGrid.fromSnapshot(snapshot[index]).name),
@@ -144,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         alignment: Alignment.bottomCenter,
                         child: Container(
                           alignment: Alignment.center,
-                          height: 50,
+                          height: heightH / 18,
                           decoration: BoxDecoration(
                             color: Colors.lightGreen[200].withOpacity(0.8),
                             borderRadius: BorderRadius.circular(20.0),
@@ -152,8 +163,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Text(
                             GetGrid.fromSnapshot(snapshot[index]).name,
                             style: TextStyle(
-                                fontSize:widthH/15,
-                                color: Colors.black,
+                                fontSize: GetGrid.fromSnapshot(snapshot[index]).name.length > 12 ?
+                                widthH/ (GetGrid.fromSnapshot(snapshot[index]).name.length * 1.25) : widthH/15.0,
                                 fontFamily: 'Nunito',
                                 fontWeight: FontWeight.bold),
                           ),

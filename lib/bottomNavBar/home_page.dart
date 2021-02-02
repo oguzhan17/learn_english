@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_english/services/advert-service.dart';
 
@@ -56,6 +57,18 @@ class _HomePageState extends State<HomePageState> {
   buildListItem(BuildContext context, DocumentSnapshot data) {
     double widthW = MediaQuery.of(context).size.width;
     final row = GetCard.fromSnapshot(data);
+    double txtSize = 15;
+    double ingTxtSize = 15;
+     if(row.title.length > 15)
+       txtSize = row.title.length * 1.0 ;
+     if(row.engtitle.length > 15)
+       ingTxtSize = row.engtitle.length * 1.0;
+    //   txtSize = row.title.length * 1.5;
+    // else if(row.title.length > 6)
+    //   txtSize = row.title.length * 1.8 ;
+    // else
+    //   txtSize = 17;
+
     return Card(
       child: InkWell(
         onTap: () => Navigator.push(
@@ -66,20 +79,18 @@ class _HomePageState extends State<HomePageState> {
         ),
         child: Container(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width /10),
+                  Container(
+                    width: widthW* 0.6,
                     child: Column(
                       children: [
                         Text(
                           row.title,
                           style: TextStyle(
-                            fontSize: widthW/15,
+                            fontSize: widthW/txtSize,
                             color: Colors.black,
                             fontFamily: 'Nunito Regular',
                           ),
@@ -87,7 +98,7 @@ class _HomePageState extends State<HomePageState> {
                         Text(
                           "(" +row.engtitle + ")",
                           style: TextStyle(
-                            fontSize: widthW/15,
+                            fontSize: widthW/ingTxtSize,
                             color: Colors.black,
                             fontFamily: 'Nunito Regular',
                           ),
@@ -96,10 +107,10 @@ class _HomePageState extends State<HomePageState> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 10.0),
+                    padding: const EdgeInsets.only(right: 10,top: 5,bottom: 5),
                     child: Container(
-                        height: widthW/2.5,
-                        width: widthW/2.5,
+                        height: widthW * 0.3,
+                        width: widthW * 0.3,
                         child: Image.network(row.photo))
                   ),
                 ],
